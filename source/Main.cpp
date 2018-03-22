@@ -1,7 +1,10 @@
 #include <Windows.h>
 #include "res.h"
 
+
 HINSTANCE hInst;
+int widthSize;
+int heightSize;
 
 INT_PTR CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -26,11 +29,21 @@ INT_PTR CALLBACK DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lPara
 
     //Dodawanie t³a
     HBITMAP hBitmap;
-    hBitmap = LoadBitmap(hInst, MAKEINTRESOURCE(IDB_BITMAP2));
+    hBitmap = (HBITMAP) LoadImage(NULL, "..\\source\\661.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
     HDC hDCBitmap;
+
+    RECT myStrecher;
+    GetWindowRect(hwndDlg, &myStrecher);
+    widthSize = myStrecher.right - myStrecher.right;
+    heightSize = myStrecher.bottom - myStrecher.top;
+
     hDCBitmap = CreateCompatibleDC(hDC); //Utworzenie kopatybilengo kontekstu  
     SelectObject(hDCBitmap, hBitmap); //Wybranie bitmapy w kontekscie 
-    BitBlt(hDC, 0, 0, 1920, 960, hDCBitmap, 0, 0, SRCCOPY); //Skopiowanie obrazu 
+    BitBlt(hDC, 0, 0, 500, 275, hDCBitmap, 0, 0, SRCCOPY); //Skopiowanie obrazu
+
+    SetStretchBltMode(hDCBitmap, HALFTONE);
+    StretchBlt(hDCBitmap, 0, 0, widthSize, heightSize, hDCBitmap, 0, 0, 400, 400, SRCCOPY);
+
     DeleteDC(hDCBitmap); //Usuniecie kontekstu 
     DeleteObject(hBitmap);
 

@@ -29,4 +29,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\source\661.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\source\OyoCtFo.jpg.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
